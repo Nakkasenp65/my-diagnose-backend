@@ -3,6 +3,7 @@ import time
 from threading import Lock
 from flask_cors import CORS
 from src.predict import predict_disease
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -42,7 +43,7 @@ def index():
     return "Welcome to the Disease Prediction API! Use /predict endpoint."
 
 if __name__ == "__main__":
-  app.run( port=5000, debug=True, host="localhost" )
-  print("Server is running on port 5000...")
+  port = int(os.environ.get("PORT", 5000))
+  app.run(host="0.0.0.0", port=port)
 
 # GET request for predict, so the user will get the result
